@@ -6,7 +6,6 @@
 package fighterfinderadmin;
 
 import fighterfinderadmin.controller.Controller;
-import fighterfinderadmin.view.LoginDialog;
 
 /**
  *
@@ -22,6 +21,10 @@ public class FighterFinderADMIN {
         
         //LoginDialog aLDialog = new LoginDialog(null, true);
         Controller myController = new Controller();
+        //System.out.println(getMD5("admin@pass1234"));
     }
+    
+    
+    
     
 }
