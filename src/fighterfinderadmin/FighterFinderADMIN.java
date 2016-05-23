@@ -5,9 +5,12 @@
  */
 package fighterfinderadmin;
 
+import fighterfinderadmin.controller.Controller;
+import fighterfinderadmin.view.LoginDialog;
+
 /**
  *
- * @author Adrian
+ * @author Alumne
  */
 public class FighterFinderADMIN {
 
@@ -16,6 +19,9 @@ public class FighterFinderADMIN {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
+        //LoginDialog aLDialog = new LoginDialog(null, true);
+        Controller myController = new Controller();
     }
     
 }
