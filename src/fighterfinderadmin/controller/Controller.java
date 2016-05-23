@@ -11,6 +11,7 @@ import fighterfinderadmin.view.MainView;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,9 +24,10 @@ public class Controller {
     public Controller() {
         /*this.myView = new MainView();
         this.myView.setVisible(true);*/
-        this.myLog = new LoginDialog(null, true);
-        this.myLog.setVisible(true);
         myRESTClient = new FighterFinderRESTClient();
+        this.myLog = new LoginDialog(null, true, this);
+        this.myLog.setVisible(true);
+        
         
         //http://www.mkyong.com/webservices/jax-rs/restfull-java-client-with-java-net-url/
     }
@@ -40,7 +42,23 @@ public class Controller {
      */
     public void logIn(String username, String password)
     {
-        throw new UnsupportedOperationException("Not supported yet");
+        //System.out.println(myRESTClient.isAdmin(username, getMD5(password)));
+        int result = myRESTClient.isAdmin(username, getMD5(password));
+        if(result != 1)
+        {
+            if(result == 0)
+            {
+                JOptionPane.showMessageDialog(this.myLog, "You can not log in", "Log in information", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(this.myLog, "Server is under maintenance", "Server info", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+        else
+        {
+            System.out.println("Open new form");
+        }
     }
     
     /**

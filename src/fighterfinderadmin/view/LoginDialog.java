@@ -5,18 +5,34 @@
  */
 package fighterfinderadmin.view;
 
+import fighterfinderadmin.controller.Controller;
+import java.util.Arrays;
+
 /**
  *
  * @author Alumne
  */
 public class LoginDialog extends javax.swing.JDialog {
-
+    
+    private Controller myController;
     /**
      * Creates new form LoginDialog
      */
     public LoginDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+    
+    /**
+     * Creates new form LoginDialog
+     * @param parent
+     * @param modal
+     * @param aController
+     */
+    public LoginDialog(java.awt.Frame parent, boolean modal, Controller aController) {
+        super(parent, modal);
+        initComponents();
+        this.myController = aController;
     }
 
     /**
@@ -41,6 +57,11 @@ public class LoginDialog extends javax.swing.JDialog {
         jLabel2.setText("Password: ");
 
         logBtn.setText("Login");
+        logBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logBtnMouseClicked(evt);
+            }
+        });
 
         usernameTF.setToolTipText("Write your username.");
 
@@ -86,6 +107,14 @@ public class LoginDialog extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void logBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logBtnMouseClicked
+        // TODO add your handling code here:
+        String username = usernameTF.getText();
+        String password = new String(passwordTF.getPassword());
+        
+        this.myController.logIn(username, password);
+    }//GEN-LAST:event_logBtnMouseClicked
 
     /**
      * @param args the command line arguments
