@@ -83,14 +83,14 @@ public class MainView extends javax.swing.JFrame {
         userPanelLayout.setHorizontalGroup(
             userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userPanelLayout.createSequentialGroup()
-                .addGap(59, 59, 59)
+                .addGap(100, 100, 100)
                 .addComponent(jLabel1)
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
         userPanelLayout.setVerticalGroup(
             userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userPanelLayout.createSequentialGroup()
-                .addGap(67, 67, 67)
+                .addGap(128, 128, 128)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -101,17 +101,17 @@ public class MainView extends javax.swing.JFrame {
         addNewCharPanel.setLayout(addNewCharPanelLayout);
         addNewCharPanelLayout.setHorizontalGroup(
             addNewCharPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(addNewCharPanelLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addNewCharPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(66, 66, 66))
         );
         addNewCharPanelLayout.setVerticalGroup(
             addNewCharPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addNewCharPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(60, 60, 60)
                 .addComponent(jLabel4)
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         jLabel5.setText("Mod character panel");
@@ -120,15 +120,15 @@ public class MainView extends javax.swing.JFrame {
         modCharPanel.setLayout(modCharPanelLayout);
         modCharPanelLayout.setHorizontalGroup(
             modCharPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(modCharPanelLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modCharPanelLayout.createSequentialGroup()
+                .addContainerGap(75, Short.MAX_VALUE)
                 .addComponent(jLabel5)
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addGap(74, 74, 74))
         );
         modCharPanelLayout.setVerticalGroup(
             modCharPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(modCharPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(62, 62, 62)
                 .addComponent(jLabel5)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -157,17 +157,17 @@ public class MainView extends javax.swing.JFrame {
         addGamePanel.setLayout(addGamePanelLayout);
         addGamePanelLayout.setHorizontalGroup(
             addGamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(addGamePanelLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addGamePanelLayout.createSequentialGroup()
+                .addContainerGap(142, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addContainerGap(218, Short.MAX_VALUE))
+                .addGap(100, 100, 100))
         );
         addGamePanelLayout.setVerticalGroup(
             addGamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addGamePanelLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(63, 63, 63)
                 .addComponent(jLabel2)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         jLabel3.setText("Mod game panel");
@@ -176,17 +176,17 @@ public class MainView extends javax.swing.JFrame {
         modGamePanel.setLayout(modGamePanelLayout);
         modGamePanelLayout.setHorizontalGroup(
             modGamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(modGamePanelLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modGamePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(103, 103, 103))
         );
         modGamePanelLayout.setVerticalGroup(
             modGamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(modGamePanelLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(39, 39, 39)
                 .addComponent(jLabel3)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout gamePanelLayout = new javax.swing.GroupLayout(gamePanel);
@@ -228,8 +228,8 @@ public class MainView extends javax.swing.JFrame {
         userMenu.setText("Users");
 
         jMenuItem1.setText("jMenuItem1");
-        jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showUserPanel(evt);
             }
         });
@@ -243,16 +243,16 @@ public class MainView extends javax.swing.JFrame {
         gameMenu.setText("Games");
 
         addGameItMenu.setText("Add new game");
-        addGameItMenu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        addGameItMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showAddNewGamePanel(evt);
             }
         });
         gameMenu.add(addGameItMenu);
 
         modGameItMenu.setText("Modify game");
-        modGameItMenu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        modGameItMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showModGamePanel(evt);
             }
         });
@@ -263,16 +263,16 @@ public class MainView extends javax.swing.JFrame {
         charMenu.setText("Characters");
 
         addNewCharItMenu.setText("Add new character");
-        addNewCharItMenu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                showAddNewCharPanel(evt);
+        addNewCharItMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addNewCharItMenuActionPerformed(evt);
             }
         });
         charMenu.add(addNewCharItMenu);
 
         modCharacterItMenu.setText("Modify character");
-        modCharacterItMenu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        modCharacterItMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showModCharPanel(evt);
             }
         });
@@ -319,50 +319,51 @@ public class MainView extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, ABOUT, "About", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_showAbout
 
-    private void showUserPanel(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showUserPanel
+    private void addNewCharItMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewCharItMenuActionPerformed
         // TODO add your handling code here:
-        hideAll();
-        userPanel.setVisible(true);
-    }//GEN-LAST:event_showUserPanel
-
-    private void showAddNewGamePanel(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showAddNewGamePanel
-        // TODO add your handling code here:
-        hideAll();
-        gamePanel.setVisible(true);
-        addGamePanel.setVisible(true);
-    }//GEN-LAST:event_showAddNewGamePanel
-
-    private void showModGamePanel(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showModGamePanel
-        // TODO add your handling code here:
-        hideAll();
-        gamePanel.setVisible(true);
-        modGamePanel.setVisible(true);
-    }//GEN-LAST:event_showModGamePanel
-
-    private void showAddNewCharPanel(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showAddNewCharPanel
-        // TODO add your handling code here:
-        hideAll();
+        /*hideAll();
         charPanel.setVisible(true);
         addNewCharPanel.setVisible(true);
-    }//GEN-LAST:event_showAddNewCharPanel
+        System.out.println("test");*/
+    }//GEN-LAST:event_addNewCharItMenuActionPerformed
 
-    private void showModCharPanel(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showModCharPanel
+    private void showModCharPanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showModCharPanel
         // TODO add your handling code here:
-        hideAll();
+        /*hideAll();
         charPanel.setVisible(true);
-        modCharPanel.setVisible(true);
+        modCharPanel.setVisible(true);*/
     }//GEN-LAST:event_showModCharPanel
+
+    private void showAddNewGamePanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showAddNewGamePanel
+        // TODO add your handling code here:
+        /*hideAll();
+        gamePanel.setVisible(true);
+        addGamePanel.setVisible(true);*/
+    }//GEN-LAST:event_showAddNewGamePanel
+
+    private void showModGamePanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showModGamePanel
+        // TODO add your handling code here:
+        /*hideAll();
+        gamePanel.setVisible(true);
+        modGamePanel.setVisible(true);*/
+    }//GEN-LAST:event_showModGamePanel
+
+    private void showUserPanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showUserPanel
+        // TODO add your handling code here:
+        /*hideAll();
+        userPanel.setVisible(true);*/
+    }//GEN-LAST:event_showUserPanel
     
     private void hideAll()
     {
         //hide all the panels
-        userPanel.setVisible(false);
+        /*userPanel.setVisible(false);
         gamePanel.setVisible(false);
         charPanel.setVisible(false);
         modGamePanel.setVisible(false);
         addGamePanel.setVisible(false);
         modCharPanel.setVisible(false);
-        addNewCharPanel.setVisible(false);
+        addNewCharPanel.setVisible(false);*/
     }
     /**
      * @param args the command line arguments
