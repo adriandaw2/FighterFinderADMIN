@@ -6,9 +6,13 @@
 package fighterfinderadmin.view;
 
 import fighterfinderadmin.controller.Controller;
+import fighterfinderadmin.entities.Model;
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -17,22 +21,28 @@ import javax.swing.JOptionPane;
 public class MainView extends javax.swing.JFrame {
     static final String ABOUT = "App made by Adrián de Feo Martínez and Albert Muñoz\nAdmin panel for FighterFinder\nVersion 0.8\nEmail: adriandefeomartinez@gmail.com\nCopyright 2016";
     private Controller myController;
+    private Container pane;
+    private Model myModel;
+    //COntainer
     /**
      * Creates new form MainFrame
      */
     public MainView() {
         initComponents();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        hideAll();
+        //hideAll();
     }
     
-    public MainView(Controller aController)
+    public MainView(Controller aController, Model aModel)
     {
         initComponents();
         this.myController = aController;
+        this.myModel = aModel;
         this.myController.setMyView(this);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        hideAll();
+        pane = getContentPane();
+        pane.setLayout(new BorderLayout());
+        //hideAll();
     }
     
     /**
@@ -44,19 +54,6 @@ public class MainView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        mainContainer = new javax.swing.JPanel();
-        userPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        charPanel = new javax.swing.JPanel();
-        addNewCharPanel = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        modCharPanel = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        gamePanel = new javax.swing.JPanel();
-        addGamePanel = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        modGamePanel = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         userMenu = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -67,6 +64,9 @@ public class MainView extends javax.swing.JFrame {
         charMenu = new javax.swing.JMenu();
         addNewCharItMenu = new javax.swing.JMenuItem();
         modCharacterItMenu = new javax.swing.JMenuItem();
+        objectiveMenu = new javax.swing.JMenu();
+        addNewObjectiveMenuItem = new javax.swing.JMenuItem();
+        modifyObjectiveMenuItem = new javax.swing.JMenuItem();
         aboutMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -75,155 +75,6 @@ public class MainView extends javax.swing.JFrame {
                 closeApp(evt);
             }
         });
-
-        jLabel1.setText("User panel");
-
-        javax.swing.GroupLayout userPanelLayout = new javax.swing.GroupLayout(userPanel);
-        userPanel.setLayout(userPanelLayout);
-        userPanelLayout.setHorizontalGroup(
-            userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(userPanelLayout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addComponent(jLabel1)
-                .addContainerGap(121, Short.MAX_VALUE))
-        );
-        userPanelLayout.setVerticalGroup(
-            userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(userPanelLayout.createSequentialGroup()
-                .addGap(128, 128, 128)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jLabel4.setText("Add character panel");
-
-        javax.swing.GroupLayout addNewCharPanelLayout = new javax.swing.GroupLayout(addNewCharPanel);
-        addNewCharPanel.setLayout(addNewCharPanelLayout);
-        addNewCharPanelLayout.setHorizontalGroup(
-            addNewCharPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addNewCharPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addGap(66, 66, 66))
-        );
-        addNewCharPanelLayout.setVerticalGroup(
-            addNewCharPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(addNewCharPanelLayout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(jLabel4)
-                .addContainerGap(74, Short.MAX_VALUE))
-        );
-
-        jLabel5.setText("Mod character panel");
-
-        javax.swing.GroupLayout modCharPanelLayout = new javax.swing.GroupLayout(modCharPanel);
-        modCharPanel.setLayout(modCharPanelLayout);
-        modCharPanelLayout.setHorizontalGroup(
-            modCharPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modCharPanelLayout.createSequentialGroup()
-                .addContainerGap(75, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addGap(74, 74, 74))
-        );
-        modCharPanelLayout.setVerticalGroup(
-            modCharPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(modCharPanelLayout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(jLabel5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout charPanelLayout = new javax.swing.GroupLayout(charPanel);
-        charPanel.setLayout(charPanelLayout);
-        charPanelLayout.setHorizontalGroup(
-            charPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(addNewCharPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, charPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(modCharPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        charPanelLayout.setVerticalGroup(
-            charPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(charPanelLayout.createSequentialGroup()
-                .addComponent(addNewCharPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(modCharPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        jLabel2.setText("Add game panel");
-
-        javax.swing.GroupLayout addGamePanelLayout = new javax.swing.GroupLayout(addGamePanel);
-        addGamePanel.setLayout(addGamePanelLayout);
-        addGamePanelLayout.setHorizontalGroup(
-            addGamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addGamePanelLayout.createSequentialGroup()
-                .addContainerGap(142, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(100, 100, 100))
-        );
-        addGamePanelLayout.setVerticalGroup(
-            addGamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(addGamePanelLayout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(jLabel2)
-                .addContainerGap(71, Short.MAX_VALUE))
-        );
-
-        jLabel3.setText("Mod game panel");
-
-        javax.swing.GroupLayout modGamePanelLayout = new javax.swing.GroupLayout(modGamePanel);
-        modGamePanel.setLayout(modGamePanelLayout);
-        modGamePanelLayout.setHorizontalGroup(
-            modGamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modGamePanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(103, 103, 103))
-        );
-        modGamePanelLayout.setVerticalGroup(
-            modGamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(modGamePanelLayout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(jLabel3)
-                .addContainerGap(95, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout gamePanelLayout = new javax.swing.GroupLayout(gamePanel);
-        gamePanel.setLayout(gamePanelLayout);
-        gamePanelLayout.setHorizontalGroup(
-            gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(gamePanelLayout.createSequentialGroup()
-                .addComponent(addGamePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(modGamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        gamePanelLayout.setVerticalGroup(
-            gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(gamePanelLayout.createSequentialGroup()
-                .addComponent(addGamePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(modGamePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout mainContainerLayout = new javax.swing.GroupLayout(mainContainer);
-        mainContainer.setLayout(mainContainerLayout);
-        mainContainerLayout.setHorizontalGroup(
-            mainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainContainerLayout.createSequentialGroup()
-                .addComponent(userPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(gamePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(charPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        mainContainerLayout.setVerticalGroup(
-            mainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(userPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(gamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(charPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
 
         userMenu.setText("Users");
 
@@ -280,6 +131,26 @@ public class MainView extends javax.swing.JFrame {
 
         jMenuBar1.add(charMenu);
 
+        objectiveMenu.setText("Objective");
+
+        addNewObjectiveMenuItem.setText("Add new objective");
+        addNewObjectiveMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showAddNewObjectivePanel(evt);
+            }
+        });
+        objectiveMenu.add(addNewObjectiveMenuItem);
+
+        modifyObjectiveMenuItem.setText("Modify objective");
+        modifyObjectiveMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showModifyObjectivePanel(evt);
+            }
+        });
+        objectiveMenu.add(modifyObjectiveMenuItem);
+
+        jMenuBar1.add(objectiveMenu);
+
         aboutMenu.setText("About");
         aboutMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -294,11 +165,11 @@ public class MainView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 635, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(0, 317, Short.MAX_VALUE)
         );
 
         pack();
@@ -325,6 +196,10 @@ public class MainView extends javax.swing.JFrame {
         charPanel.setVisible(true);
         addNewCharPanel.setVisible(true);
         System.out.println("test");*/
+        pane.removeAll();
+        pane.add(new AddCharacterPanel(this.myController, this.myModel));
+        //pack();
+        setVisible(true);
     }//GEN-LAST:event_addNewCharItMenuActionPerformed
 
     private void showModCharPanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showModCharPanel
@@ -332,13 +207,25 @@ public class MainView extends javax.swing.JFrame {
         /*hideAll();
         charPanel.setVisible(true);
         modCharPanel.setVisible(true);*/
+        pane.removeAll();
+        pane.add(new ModCharacterPanel(this.myController));
+        //pack();
+        setVisible(true);
     }//GEN-LAST:event_showModCharPanel
-
+    
+    
+    
     private void showAddNewGamePanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showAddNewGamePanel
         // TODO add your handling code here:
         /*hideAll();
         gamePanel.setVisible(true);
         addGamePanel.setVisible(true);*/
+        //this.myController.setCurrentPanel(new AddGamePanel(this.myController));
+        //mainContainer.setContentPane
+        pane.removeAll();
+        pane.add(new AddGamePanel(this.myController));
+        //pack();
+        setVisible(true);
     }//GEN-LAST:event_showAddNewGamePanel
 
     private void showModGamePanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showModGamePanel
@@ -346,6 +233,10 @@ public class MainView extends javax.swing.JFrame {
         /*hideAll();
         gamePanel.setVisible(true);
         modGamePanel.setVisible(true);*/
+         pane.removeAll();
+        pane.add(new ModGamePanel(this.myController));
+        //pack();
+        setVisible(true);
     }//GEN-LAST:event_showModGamePanel
 
     private void showUserPanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showUserPanel
@@ -353,6 +244,32 @@ public class MainView extends javax.swing.JFrame {
         /*hideAll();
         userPanel.setVisible(true);*/
     }//GEN-LAST:event_showUserPanel
+
+    private void showAddNewObjectivePanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showAddNewObjectivePanel
+        // TODO add your handling code here:
+        pane.removeAll();
+        pane.add(new AddObjectivePanel(this.myController));
+        //pack();
+        setVisible(true);
+    }//GEN-LAST:event_showAddNewObjectivePanel
+
+    private void showModifyObjectivePanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showModifyObjectivePanel
+        // TODO add your handling code here:
+        pane.removeAll();
+        pane.add(new ModObjectivePanel(this.myController));
+        //pack();
+        setVisible(true);
+    }//GEN-LAST:event_showModifyObjectivePanel
+    
+    /**
+     * getMainContainer
+     * Method to get the mainContainer
+     * @return JPanel
+     */
+    /*public JPanel getMainContainer()
+    {
+        return mainContainer.setC;
+    }*/
     
     private void hideAll()
     {
@@ -404,27 +321,17 @@ public class MainView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu aboutMenu;
     private javax.swing.JMenuItem addGameItMenu;
-    private javax.swing.JPanel addGamePanel;
     private javax.swing.JMenuItem addNewCharItMenu;
-    private javax.swing.JPanel addNewCharPanel;
+    private javax.swing.JMenuItem addNewObjectiveMenuItem;
     private javax.swing.JMenu charMenu;
-    private javax.swing.JPanel charPanel;
     private javax.swing.JMenu gameMenu;
-    private javax.swing.JPanel gamePanel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JPanel mainContainer;
-    private javax.swing.JPanel modCharPanel;
     private javax.swing.JMenuItem modCharacterItMenu;
     private javax.swing.JMenuItem modGameItMenu;
-    private javax.swing.JPanel modGamePanel;
+    private javax.swing.JMenuItem modifyObjectiveMenuItem;
+    private javax.swing.JMenu objectiveMenu;
     private javax.swing.JMenu userMenu;
-    private javax.swing.JPanel userPanel;
     // End of variables declaration//GEN-END:variables
 }

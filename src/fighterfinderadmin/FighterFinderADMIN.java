@@ -6,6 +6,7 @@
 package fighterfinderadmin;
 
 import fighterfinderadmin.controller.Controller;
+import fighterfinderadmin.entities.Model;
 
 /**
  *
@@ -20,7 +21,8 @@ public class FighterFinderADMIN {
         // TODO code application logic here
         
         //LoginDialog aLDialog = new LoginDialog(null, true);
-        Controller myController = new Controller();
+        Model myModel = new Model();
+        Controller myController = new Controller(myModel);
         //System.out.println(getMD5("admin@pass1234"));
     }
     

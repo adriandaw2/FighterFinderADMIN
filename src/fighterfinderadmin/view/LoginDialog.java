@@ -57,6 +57,7 @@ public class LoginDialog extends javax.swing.JDialog {
         jLabel2.setText("Password: ");
 
         logBtn.setText("Login");
+        logBtn.setToolTipText("Login.");
         logBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 logBtnMouseClicked(evt);

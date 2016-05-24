@@ -9,22 +9,21 @@ import fighterfinderadmin.controller.Controller;
 
 /**
  *
- * @author Alumne
+ * @author Adrian
  */
-public class AddGamePanel extends javax.swing.JPanel {
-
+public class AddObjectivePanel extends javax.swing.JPanel {
+    
     private Controller myController;
     /**
-     * Creates new form gamePanel
+     * Creates new form AddObjective
      */
-    public AddGamePanel() {
+    public AddObjectivePanel() {
         initComponents();
     }
     
-    public AddGamePanel(Controller aController) {
+    public AddObjectivePanel(Controller aController) {
         initComponents();
         this.myController = aController;
-        //this.myController.setCurrentPanel(this);
     }
 
     /**
@@ -37,46 +36,46 @@ public class AddGamePanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        newGameTF = new javax.swing.JTextField();
-        addBtn = new javax.swing.JButton();
+        newObjectiveMsgTF = new javax.swing.JTextField();
+        addObjectiveBtn = new javax.swing.JButton();
 
-        jLabel1.setText("Game name: ");
+        jLabel1.setText("New objective message: ");
 
-        newGameTF.setToolTipText("Write the game name.");
+        newObjectiveMsgTF.setToolTipText("Write new message objective.");
 
-        addBtn.setText("Add");
+        addObjectiveBtn.setText("Add objective");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addObjectiveBtn)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(newGameTF, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(newObjectiveMsgTF, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(newGameTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
-                .addComponent(addBtn)
-                .addContainerGap(52, Short.MAX_VALUE))
+                    .addComponent(newObjectiveMsgTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addComponent(addObjectiveBtn)
+                .addContainerGap(48, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addBtn;
+    private javax.swing.JButton addObjectiveBtn;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField newGameTF;
+    private javax.swing.JTextField newObjectiveMsgTF;
     // End of variables declaration//GEN-END:variables
 }

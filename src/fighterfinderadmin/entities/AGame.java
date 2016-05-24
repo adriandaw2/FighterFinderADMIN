@@ -63,15 +63,7 @@ public class AGame {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("\n[GAME]{" );
-        sb.append("\n[id]:");
-        sb.append(id);
-        sb.append(", [name]:");
-        sb.append(name);
-        sb.append(", [password]:");
-        return sb.toString();
+        return name;
     }
     
     

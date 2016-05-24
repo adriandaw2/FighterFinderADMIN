@@ -6,12 +6,17 @@
 package fighterfinderadmin.controller;
 
 import fighterfinderadmin.controller.restclient.FighterFinderRESTClient;
+import fighterfinderadmin.entities.AGame;
+import fighterfinderadmin.entities.Model;
 import fighterfinderadmin.view.LoginDialog;
 import fighterfinderadmin.view.MainView;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -20,11 +25,14 @@ import javax.swing.JOptionPane;
 public class Controller {
     private MainView myView;
     private LoginDialog myLog;
+    private JPanel currentPanel;
     private FighterFinderRESTClient myRESTClient;
-    public Controller() {
+    private Model myModel;
+    public Controller(Model aModel) {
         /*this.myView = new MainView();
         this.myView.setVisible(true);*/
         myRESTClient = new FighterFinderRESTClient();
+        this.myModel = aModel;
         this.myLog = new LoginDialog(null, true, this);
         this.myLog.setVisible(true);
         
@@ -57,10 +65,29 @@ public class Controller {
     public void setMyRESTClient(FighterFinderRESTClient myRESTClient) {
         this.myRESTClient = myRESTClient;
     }
+
+    public JPanel getCurrentPanel() {
+        return currentPanel;
+    }
+
+    public void setCurrentPanel(JPanel currentPanel) {
+        this.currentPanel = currentPanel;
+        handleCurrentPanel();
+    }
     
     
     
     
+    /**
+     * handleCurrentPanel
+     * Method to change the current pane, it will always be called after a setCurrentPanel so the mainview change of pane.
+     */
+    private void handleCurrentPanel()
+    {
+        this.myView.setContentPane(this.currentPanel);
+        this.myView.getContentPane().setVisible(true);
+        System.out.println("Panel created");
+    }
     
     /**
      * logIn
@@ -87,7 +114,7 @@ public class Controller {
         {
             this.myLog.setVisible(false);
             System.out.println("Open new form");
-            this.myView = new MainView(this);
+            this.myView = new MainView(this, this.myModel);
             this.myView.setVisible(true);
         }
     }
@@ -155,6 +182,18 @@ public class Controller {
     public void modifyObjective(String objMsgToMod, int oID)
     {
         throw new UnsupportedOperationException("Not supported yet");
+    }
+    
+    
+    /**
+     * getAllGamesFromDatabase
+     * Function to get all games from database
+     * @return List<AGame>
+     */
+    public List<AGame> getAllGamesFromDatabase()
+    {
+        List<AGame> aList = myRESTClient.getAllGamesFromDatabase();
+        return aList;
     }
     
     

@@ -6,8 +6,11 @@
 package fighterfinderadmin.controller.restclient;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import fighterfinderadmin.entities.AGame;
 import fighterfinderadmin.entities.AUser;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -21,7 +24,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,6 +55,7 @@ public class FighterFinderRESTClient {
      */
     public int isAdmin(String username, String password)
     {
+        response = "";
         AUser aU = null;
         int result = 0;
         try{
@@ -126,6 +132,7 @@ public class FighterFinderRESTClient {
      */
     public int addNewGame(String gName)
     {
+        response = "";
         int result = 0;
         try{
             url = new URL(APIURL+"game/addGameToDatabase");
@@ -162,6 +169,7 @@ public class FighterFinderRESTClient {
      */
     public int addNewCharacterToGame(String cName, int gID)
     {
+        response = "";
         int result = 0;
         try{
             url = new URL(APIURL+"character/addCharacterToGame");
@@ -197,6 +205,7 @@ public class FighterFinderRESTClient {
      */
     public int addNewObjective(String objMsg)
     {
+        response = "";
         int result = 0;
         try{
             url = new URL(APIURL+"objective/addNewObj");
@@ -233,6 +242,7 @@ public class FighterFinderRESTClient {
      */
     public int modObjective(String nObjMsg, int oID)
     {
+        response = "";
         int result = 0;
         try{
             url = new URL(APIURL+"objective/modObjective");
@@ -269,6 +279,7 @@ public class FighterFinderRESTClient {
      */
     public int modGame(String gNewName, int gID)
     {
+        response = "";
         int result = 0;
         try{
             url = new URL(APIURL+"game/modGameInDatabase");
@@ -305,6 +316,7 @@ public class FighterFinderRESTClient {
      */
     public int modCharacter(String cNewName, int cID)
     {
+        response = "";
         int result = 0;
         try{
             url = new URL(APIURL+"character/modCharacter");
@@ -328,6 +340,73 @@ public class FighterFinderRESTClient {
         }
         
         return result;
+    }
+    
+    
+    /**
+     * getAllGamesFromDatabase
+     * Function to get all the games from database
+     * @return List<AGame>
+     */
+    public List<AGame> getAllGamesFromDatabase()
+    {
+        response = "";
+        ArrayList<AGame> aList = new ArrayList();
+        AGame aGame = null;
+        try{
+            url = new URL(APIURL+"game");
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(15000);
+            conn.setConnectTimeout(15000);
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded");
+            //conn
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+            
+            int responseCode= 0;
+            String line= "";
+
+            try {
+                responseCode = conn.getResponseCode();
+            } catch (IOException ex) {
+                ex.printStackTrace(System.out);
+            }
+
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+
+                BufferedReader br= null;
+                try {
+                    br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    while ((line=br.readLine()) != null) {
+                        response+=line;
+                    }
+                } catch (IOException ex) {
+                    ex.printStackTrace(System.out);
+                }
+            }
+            else response = null;
+
+            if (response!= null) {
+                JsonObject jsonObject = new JsonParser().parse(response).getAsJsonObject();
+                JsonArray jsonArray = jsonObject.getAsJsonArray("allGames");
+
+                for (int i = 0; i < jsonArray.size(); ++i) {
+                    JsonElement rec = jsonArray.get(i);
+                    aGame = new Gson().fromJson(rec, AGame.class);
+                    aList.add(aGame);
+                }
+            }
+            
+        }catch(MalformedURLException ex)
+        {
+            ex.printStackTrace(System.out);
+        } catch (IOException ex) {
+            ex.printStackTrace(System.out);
+        }finally{
+            conn.disconnect();
+        }
+        return aList;
     }
     
     /**
