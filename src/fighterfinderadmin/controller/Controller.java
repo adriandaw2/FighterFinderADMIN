@@ -33,6 +33,34 @@ public class Controller {
     }
     
     //public Controller()
+
+    public MainView getMyView() {
+        return myView;
+    }
+
+    public void setMyView(MainView myView) {
+        this.myView = myView;
+    }
+
+    public LoginDialog getMyLog() {
+        return myLog;
+    }
+
+    public void setMyLog(LoginDialog myLog) {
+        this.myLog = myLog;
+    }
+
+    public FighterFinderRESTClient getMyRESTClient() {
+        return myRESTClient;
+    }
+
+    public void setMyRESTClient(FighterFinderRESTClient myRESTClient) {
+        this.myRESTClient = myRESTClient;
+    }
+    
+    
+    
+    
     
     /**
      * logIn
@@ -57,7 +85,10 @@ public class Controller {
         }
         else
         {
+            this.myLog.setVisible(false);
             System.out.println("Open new form");
+            this.myView = new MainView(this);
+            this.myView.setVisible(true);
         }
     }
     
@@ -126,6 +157,9 @@ public class Controller {
         throw new UnsupportedOperationException("Not supported yet");
     }
     
+    
+    
+    
     private String getMD5(String sToMD5)
     {
         String toMD5 = "";
@@ -143,5 +177,15 @@ public class Controller {
             throw new RuntimeException(e);
         }
         return toMD5;
+    }
+    
+
+    
+    /**
+     * closeApp
+     * Method to close thw whole app
+     */
+    public void closeApp() {
+        
     }
 }
