@@ -68,5 +68,15 @@ public class AGame{
         return name;
     }
     
+    public String toStringAllGameInfo()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append(name);
+        sb.append("->ID:");
+        sb.append(id);
+        
+        return sb.toString();
+    }
+    
     
 }

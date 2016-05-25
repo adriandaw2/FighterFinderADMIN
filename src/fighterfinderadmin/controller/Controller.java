@@ -128,7 +128,15 @@ public class Controller {
      */
     public void addNewGame(String gName)
     {
-        throw new UnsupportedOperationException("Not supported yet");
+        int result = myRESTClient.addNewGame(gName);
+        if(result == -1)
+        {
+            JOptionPane.showMessageDialog(this.myView, "Game not added", "Add new game information", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this.myLog, "Game added to the database: "+gName, "Log in information", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
     
     /**
@@ -140,7 +148,15 @@ public class Controller {
      */
     public void addNewCharacterToGame(String cName, int gID)
     {
-        throw new UnsupportedOperationException("Not supported yet");
+        int result = myRESTClient.addNewCharacterToGame(cName, gID);
+        if(result == -1)
+        {
+            JOptionPane.showMessageDialog(this.myView, "Character not added", "Add character information", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this.myLog, "Character->"+cName+" added to the game with ID->"+gID, "Character add information", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
     
     /**
@@ -172,7 +188,15 @@ public class Controller {
      */
     public void addNewObjective(String objMesg)
     {
-        throw new UnsupportedOperationException("Not supported yet");
+        int result = myRESTClient.addNewObjective(objMesg);
+        if(result == -1)
+        {
+            JOptionPane.showMessageDialog(this.myView, "Objective not added", "Add new objective message", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this.myLog, "objective added to the database: "+objMesg, "Add new objective message", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
     
     /**

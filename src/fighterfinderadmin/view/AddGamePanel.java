@@ -6,6 +6,7 @@
 package fighterfinderadmin.view;
 
 import fighterfinderadmin.controller.Controller;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -45,6 +46,11 @@ public class AddGamePanel extends javax.swing.JPanel {
         newGameTF.setToolTipText("Write the game name.");
 
         addBtn.setText("Add");
+        addBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addBtnMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -72,6 +78,18 @@ public class AddGamePanel extends javax.swing.JPanel {
                 .addContainerGap(52, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBtnMouseClicked
+        // TODO add your handling code here:
+        if(newGameTF.getText().length() > 0)
+        {
+            this.myController.addNewGame(newGameTF.getText());
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Game name can not be empty", "New game information", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_addBtnMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -54,6 +54,17 @@ public class Model {
      * 
      */
     
-    
+    public String toStringAllGamesInfo()
+    {
+        StringBuilder sb = new StringBuilder();
+        for(AGame g : this.myGameList)
+        {
+            sb.append("\n");
+            sb.append(g.toStringAllGameInfo());
+            sb.append("\n");
+        }
+        
+        return sb.toString();
+    }
     
 }

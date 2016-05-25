@@ -35,9 +35,10 @@ public class MainView extends javax.swing.JFrame {
     
     public MainView(Controller aController, Model aModel)
     {
-        initComponents();
+        
         this.myController = aController;
         this.myModel = aModel;
+        initComponents();
         this.myController.setMyView(this);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pane = getContentPane();
@@ -198,6 +199,7 @@ public class MainView extends javax.swing.JFrame {
         System.out.println("test");*/
         pane.removeAll();
         pane.add(new AddCharacterPanel(this.myController, this.myModel));
+        //pane.add(new TestComboBoxGame(this.myController));
         //pack();
         setVisible(true);
     }//GEN-LAST:event_addNewCharItMenuActionPerformed
@@ -234,7 +236,7 @@ public class MainView extends javax.swing.JFrame {
         gamePanel.setVisible(true);
         modGamePanel.setVisible(true);*/
          pane.removeAll();
-        pane.add(new ModGamePanel(this.myController));
+        pane.add(new ModGamePanel(this.myController, this.myModel));
         //pack();
         setVisible(true);
     }//GEN-LAST:event_showModGamePanel

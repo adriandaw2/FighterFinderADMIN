@@ -6,6 +6,7 @@
 package fighterfinderadmin.view;
 
 import fighterfinderadmin.controller.Controller;
+import fighterfinderadmin.entities.Model;
 
 /**
  *
@@ -15,6 +16,7 @@ public class ModGamePanel extends javax.swing.JPanel {
     
     
     private Controller myController;
+    private Model myModel;
     /**
      * Creates new form ModGamePanel
      */
@@ -22,9 +24,10 @@ public class ModGamePanel extends javax.swing.JPanel {
         initComponents();
     }
     
-    public ModGamePanel(Controller aController) {
+    public ModGamePanel(Controller aController, Model aModel) {
         initComponents();
         this.myController = aController;
+        this.myModel = aModel;
     }
 
     /**

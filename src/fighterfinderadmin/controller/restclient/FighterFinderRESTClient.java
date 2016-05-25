@@ -145,7 +145,37 @@ public class FighterFinderRESTClient {
             conn.setDoOutput(true);
             
             HashMap<String, String> dataParams = new HashMap();
-            result = 1;
+            dataParams.put("gName", gName);
+            OutputStream os = conn.getOutputStream();
+            
+            BufferedWriter writer = new BufferedWriter(
+                    new OutputStreamWriter(os, "UTF-8"));
+            writer.write(getQuery(dataParams));
+            writer.flush();
+            writer.close();
+            os.close();
+            
+            int responseCode = 0;
+            String line= "";
+            responseCode = conn.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+
+                BufferedReader br= null;
+                    try {
+                        br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                        while ((line=br.readLine()) != null) {
+                            response+=line;
+                        }
+                    } catch (IOException ex) {
+                        ex.printStackTrace(System.out);
+                }
+            }
+            else response = null;
+            
+            if (response!= null) {
+                result = Integer.parseInt(response);
+            }
+            //result = 1;
         }catch(MalformedURLException ex)
         {
             result = -1;
@@ -182,7 +212,37 @@ public class FighterFinderRESTClient {
             conn.setDoOutput(true);
             
             HashMap<String, String> dataParams = new HashMap();
-            result = 1;
+            dataParams.put("cName", cName);
+            dataParams.put("gID", String.valueOf(gID));
+            OutputStream os = conn.getOutputStream();
+            
+            BufferedWriter writer = new BufferedWriter(
+                    new OutputStreamWriter(os, "UTF-8"));
+            writer.write(getQuery(dataParams));
+            writer.flush();
+            writer.close();
+            os.close();
+            
+            int responseCode = 0;
+            String line= "";
+            responseCode = conn.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+
+                BufferedReader br= null;
+                    try {
+                        br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                        while ((line=br.readLine()) != null) {
+                            response+=line;
+                        }
+                    } catch (IOException ex) {
+                        ex.printStackTrace(System.out);
+                }
+            }
+            else response = null;
+            
+            if (response!= null) {
+                result = Integer.parseInt(response);
+            }
         }catch(MalformedURLException ex)
         {
             result = -1;
@@ -218,7 +278,36 @@ public class FighterFinderRESTClient {
             conn.setDoOutput(true);
             
             HashMap<String, String> dataParams = new HashMap();
-            result = 1;
+            dataParams.put("objmsg", objMsg);
+            OutputStream os = conn.getOutputStream();
+            
+            BufferedWriter writer = new BufferedWriter(
+                    new OutputStreamWriter(os, "UTF-8"));
+            writer.write(getQuery(dataParams));
+            writer.flush();
+            writer.close();
+            os.close();
+            
+            int responseCode = 0;
+            String line= "";
+            responseCode = conn.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+
+                BufferedReader br= null;
+                    try {
+                        br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                        while ((line=br.readLine()) != null) {
+                            response+=line;
+                        }
+                    } catch (IOException ex) {
+                        ex.printStackTrace(System.out);
+                }
+            }
+            else response = null;
+            
+            if (response!= null) {
+                result = Integer.parseInt(response);
+            }
         }catch(MalformedURLException ex)
         {
             result = -1;
@@ -352,7 +441,7 @@ public class FighterFinderRESTClient {
     public List<AGame> getAllGamesFromDatabase()
     {
         response = "";
-        ArrayList<AGame> aList = new ArrayList();
+        List<AGame> aList = new ArrayList();
         AGame aGame = null;
         try{
             url = new URL(APIURL+"game");

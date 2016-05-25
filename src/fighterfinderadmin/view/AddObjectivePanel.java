@@ -6,6 +6,7 @@
 package fighterfinderadmin.view;
 
 import fighterfinderadmin.controller.Controller;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -44,6 +45,11 @@ public class AddObjectivePanel extends javax.swing.JPanel {
         newObjectiveMsgTF.setToolTipText("Write new message objective.");
 
         addObjectiveBtn.setText("Add objective");
+        addObjectiveBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addObjectiveBtnMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -71,6 +77,18 @@ public class AddObjectivePanel extends javax.swing.JPanel {
                 .addContainerGap(48, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addObjectiveBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addObjectiveBtnMouseClicked
+        // TODO add your handling code here:
+        if(newObjectiveMsgTF.getText().length() > 0)
+        {
+            this.myController.addNewObjective(newObjectiveMsgTF.getText());
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Objective message can not be empty", "New game information", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_addObjectiveBtnMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
