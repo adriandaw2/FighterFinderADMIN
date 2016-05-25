@@ -1,5 +1,6 @@
 package fighterfinderadmin.entities;
 
+import java.io.Serializable;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -7,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Alumne
  */
 @XmlRootElement
-public class AUser {
+public class AUser{
     private int id;
     private String nick;
     private String email;

@@ -6,7 +6,9 @@
 package fighterfinderadmin.controller;
 
 import fighterfinderadmin.controller.restclient.FighterFinderRESTClient;
+import fighterfinderadmin.entities.ACharacter;
 import fighterfinderadmin.entities.AGame;
+import fighterfinderadmin.entities.AObjective;
 import fighterfinderadmin.entities.Model;
 import fighterfinderadmin.view.LoginDialog;
 import fighterfinderadmin.view.MainView;
@@ -193,6 +195,31 @@ public class Controller {
     public List<AGame> getAllGamesFromDatabase()
     {
         List<AGame> aList = myRESTClient.getAllGamesFromDatabase();
+        return aList;
+    }
+    
+    /**
+     * getAllObjectivesFromDatabase
+     * FUnction to get all the objectives
+     * @return List<AObjective>
+     */
+    public List<AObjective> getAllObjectivesFromDatabase()
+    {
+        List<AObjective> aList = null;
+        
+        return aList;
+    }
+    
+    
+    /**
+     * getAllObjectivesFromDatabase
+     * FUnction to get all the objectives
+     * @return List<ACharacter>
+     */
+    public List<ACharacter> getAllCharactersFromGame(int gID)
+    {
+        List<ACharacter> aList = null;
+        System.out.println("Game selected->"+gID);
         return aList;
     }
     

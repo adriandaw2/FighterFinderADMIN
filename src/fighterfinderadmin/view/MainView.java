@@ -208,7 +208,7 @@ public class MainView extends javax.swing.JFrame {
         charPanel.setVisible(true);
         modCharPanel.setVisible(true);*/
         pane.removeAll();
-        pane.add(new ModCharacterPanel(this.myController));
+        pane.add(new ModCharacterPanel(this.myController, this.myModel));
         //pack();
         setVisible(true);
     }//GEN-LAST:event_showModCharPanel

@@ -6,9 +6,14 @@
 package fighterfinderadmin.view;
 
 import fighterfinderadmin.controller.Controller;
+import fighterfinderadmin.entities.ACharacter;
 import fighterfinderadmin.entities.AGame;
 import fighterfinderadmin.entities.Model;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -19,6 +24,8 @@ public class AddCharacterPanel extends javax.swing.JPanel {
     private Controller myController;
     private Model myModel;
     private int currentGameID = -1;
+    private List<AGame> aGList;
+    private List<ACharacter> aCList;
     /**
      * Creates new form AddCharacterPanel
      */
@@ -31,6 +38,7 @@ public class AddCharacterPanel extends javax.swing.JPanel {
         this.myController = aController;
         this.myModel = aModel;
         fillGamesCombobox();
+        addCustomCB();
     }
     /**
      * fillGamesCombobox
@@ -39,10 +47,15 @@ public class AddCharacterPanel extends javax.swing.JPanel {
      */
     private void fillGamesCombobox()
     {
+        AGame[] arrTest = new AGame[]{new AGame(1, "Game 1"),new AGame(2, "Game 2"),new AGame(3, "Game 3")};
         this.myModel.setMyGameList(this.myController.getAllGamesFromDatabase());
-        this.currentGameID = this.myModel.getMyGameList().get(0).getId();
-        gameListCB.setModel(new DefaultComboBoxModel(this.myModel.getMyGameList().toArray()));
+        this.aGList = this.myModel.getMyGameList();
+        //this.currentGameID = this.aGList.get(0).getId();
+        //AGame[] gArray = new AGame[this.aGList.size()];
+        //this.aGList.toArray(gArray);
+        gameListCB.setModel(new DefaultComboBoxModel(this.aGList.toArray()));
         System.out.println(this.currentGameID);
+        jComboBox1.setModel(new DefaultComboBoxModel(arrTest));
     }
     
     /**
@@ -59,6 +72,7 @@ public class AddCharacterPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         gameListCB = new javax.swing.JComboBox();
         addCharBtn = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox();
 
         jLabel1.setText("Character name: ");
 
@@ -67,11 +81,18 @@ public class AddCharacterPanel extends javax.swing.JPanel {
         gameListCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "item 1", "item 2", "item 3", "item 4" }));
         gameListCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                setCurrentGameID(evt);
+                gameListCBActionPerformed(evt);
             }
         });
 
         addCharBtn.setText("Add character");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -80,15 +101,21 @@ public class AddCharacterPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(addCharBtn)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(newCharNameTF)
-                            .addComponent(gameListCB, 0, 200, Short.MAX_VALUE))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel2))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(18, 18, 18)
+                            .addComponent(newCharNameTF, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(6, 6, 6)
+                            .addComponent(gameListCB, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(117, 117, 117)
+                        .addComponent(addCharBtn)))
                 .addContainerGap(70, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -103,24 +130,51 @@ public class AddCharacterPanel extends javax.swing.JPanel {
                     .addComponent(jLabel2)
                     .addComponent(gameListCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(57, 57, 57)
-                .addComponent(addCharBtn)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(addCharBtn)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void setCurrentGameID(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setCurrentGameID
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+        System.out.println(jComboBox1.getSelectedItem().toString());
+        //jComboBox1.getS
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void gameListCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gameListCBActionPerformed
         // TODO add your handling code here:
         AGame aG = (AGame)gameListCB.getSelectedItem();
         this.currentGameID = aG.getId();
-        System.out.println(aG.getId());
-    }//GEN-LAST:event_setCurrentGameID
+        System.out.println(this.currentGameID);
+    }//GEN-LAST:event_gameListCBActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addCharBtn;
     private javax.swing.JComboBox gameListCB;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField newCharNameTF;
     // End of variables declaration//GEN-END:variables
+
+    private void addCustomCB() {
+        JComboBox comboBox = new JComboBox(this.aGList.toArray());
+        comboBox.addItemListener(new ItemListener() {
+            //
+            // Listening if a new items of the combo box has been selected.
+            //
+            @Override
+            public void itemStateChanged(ItemEvent event) {
+                JComboBox comboBox = (JComboBox) event.getSource();
+
+                // The item affected by the event.
+                Object item = event.getItem();
+                System.out.println(item);
+            }
+        });
+        add(comboBox);
+    }
 }

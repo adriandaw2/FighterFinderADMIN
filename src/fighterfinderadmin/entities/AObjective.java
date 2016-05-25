@@ -1,5 +1,7 @@
 package fighterfinderadmin.entities;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Alumne

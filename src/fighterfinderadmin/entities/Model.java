@@ -5,14 +5,14 @@
  */
 package fighterfinderadmin.entities;
 
-import java.io.Serializable;
+
 import java.util.List;
 
 /**
  *
  * @author Adrian
  */
-public class Model implements Serializable{
+public class Model {
     private List<AGame> myGameList;
     private List<ACharacter> myCharList;
     private List<AObjective> myObjectiveList;

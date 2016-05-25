@@ -1,10 +1,12 @@
 package fighterfinderadmin.entities;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Alumne
  */
-public class AProfile {
+public class AProfile{
     private int id;
     private String profileType;
 

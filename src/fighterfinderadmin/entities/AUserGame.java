@@ -1,10 +1,12 @@
 package fighterfinderadmin.entities;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Alumne
  */
-public class AUserGame {
+public class AUserGame{
     private int id;
     private int idUser;
     private int idGame;

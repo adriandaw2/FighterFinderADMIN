@@ -6,6 +6,9 @@
 package fighterfinderadmin.view;
 
 import fighterfinderadmin.controller.Controller;
+import fighterfinderadmin.entities.AGame;
+import fighterfinderadmin.entities.Model;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -14,7 +17,8 @@ import fighterfinderadmin.controller.Controller;
 public class ModCharacterPanel extends javax.swing.JPanel {
     
     private Controller myController;
-    
+    private Model myModel;
+    private int gameIDToSearch;
     /**
      * Creates new form ModCharacterPanel
      */
@@ -22,9 +26,12 @@ public class ModCharacterPanel extends javax.swing.JPanel {
         initComponents();
     }
     
-    public ModCharacterPanel(Controller aController) {
+    public ModCharacterPanel(Controller aController, Model aModel) {
         initComponents();
+        this.gameIDToSearch = -1;
         this.myController = aController;
+        this.myModel = aModel;
+        fillGamesCombobox();
     }
 
     /**
@@ -49,6 +56,12 @@ public class ModCharacterPanel extends javax.swing.JPanel {
         jLabel1.setText("Game: ");
 
         jLabel2.setText("Character to mod: ");
+
+        modCharGameListCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modCharGameListCBActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Character name: ");
 
@@ -112,6 +125,15 @@ public class ModCharacterPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void modCharGameListCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modCharGameListCBActionPerformed
+        // TODO add your handling code here:
+        //fill the characters combobox with that game
+        AGame aG = (AGame)modCharGameListCB.getSelectedItem();
+        this.gameIDToSearch = aG.getId();
+        this.myModel.setMyCharList(this.myController.getAllCharactersFromGame(this.gameIDToSearch));
+        characterListToModCB.setModel(new DefaultComboBoxModel(this.myModel.getMyCharList().toArray()));
+    }//GEN-LAST:event_modCharGameListCBActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox characterListToModCB;
@@ -124,4 +146,10 @@ public class ModCharacterPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox modCharGameListCB;
     private javax.swing.JButton modCharacterBtn;
     // End of variables declaration//GEN-END:variables
+
+    private void fillGamesCombobox() {
+        this.myModel.setMyGameList(this.myController.getAllGamesFromDatabase());
+        //this.currentGameID = this.myModel.getMyGameList().get(0).getId();
+        modCharGameListCB.setModel(new DefaultComboBoxModel(this.myModel.getMyGameList().toArray()));
+    }
 }

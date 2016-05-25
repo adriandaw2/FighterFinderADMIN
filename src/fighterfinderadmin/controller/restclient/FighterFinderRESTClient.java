@@ -10,6 +10,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import fighterfinderadmin.entities.ACharacter;
 import fighterfinderadmin.entities.AGame;
 import fighterfinderadmin.entities.AUser;
 import java.io.BufferedReader;
@@ -395,6 +396,76 @@ public class FighterFinderRESTClient {
                     JsonElement rec = jsonArray.get(i);
                     aGame = new Gson().fromJson(rec, AGame.class);
                     aList.add(aGame);
+                }
+            }
+            
+        }catch(MalformedURLException ex)
+        {
+            ex.printStackTrace(System.out);
+        } catch (IOException ex) {
+            ex.printStackTrace(System.out);
+        }finally{
+            conn.disconnect();
+        }
+        return aList;
+    }
+    
+    /**
+     * getAllCharactersFromGame
+     * Function to get all characters from a game
+     * @param aGameID
+     * @return List<ACharacter>
+     */
+    public List<ACharacter> getAllCharactersFromGame(int aGameID)
+    {
+        ArrayList<ACharacter> aList = new ArrayList();
+        response = "";
+        ACharacter aChar = null;
+        try{
+            url = new URL(APIURL+"character/getAllCharactersFromGame");
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(15000);
+            conn.setConnectTimeout(15000);
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded");
+            //conn
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+            
+            HashMap<String, Integer> dataParams = new HashMap();
+            dataParams.put("gameID", aGameID);
+            
+            int responseCode= 0;
+            String line= "";
+
+            try {
+                responseCode = conn.getResponseCode();
+            } catch (IOException ex) {
+                ex.printStackTrace(System.out);
+            }
+
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+
+                BufferedReader br= null;
+                try {
+                    br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    while ((line=br.readLine()) != null) {
+                        response+=line;
+                    }
+                } catch (IOException ex) {
+                    ex.printStackTrace(System.out);
+                }
+            }
+            else response = null;
+
+            if (response!= null) {
+                JsonObject jsonObject = new JsonParser().parse(response).getAsJsonObject();
+                JsonArray jsonArray = jsonObject.getAsJsonArray("allCharactersFromGame");
+
+                for (int i = 0; i < jsonArray.size(); ++i) {
+                    JsonElement rec = jsonArray.get(i);
+                    aChar = new Gson().fromJson(rec, ACharacter.class);
+                    aList.add(aChar);
                 }
             }
             
