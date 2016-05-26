@@ -417,7 +417,37 @@ public class FighterFinderRESTClient {
             conn.setDoOutput(true);
             
             HashMap<String, String> dataParams = new HashMap();
-            result = 1;
+            dataParams.put("cName", cNewName);
+            dataParams.put("cID", String.valueOf(cID));
+            OutputStream os = conn.getOutputStream();
+            
+            BufferedWriter writer = new BufferedWriter(
+                    new OutputStreamWriter(os, "UTF-8"));
+            writer.write(getQuery(dataParams));
+            writer.flush();
+            writer.close();
+            os.close();
+            
+            int responseCode = 0;
+            String line= "";
+            responseCode = conn.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+
+                BufferedReader br= null;
+                    try {
+                        br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                        while ((line=br.readLine()) != null) {
+                            response+=line;
+                        }
+                    } catch (IOException ex) {
+                        ex.printStackTrace(System.out);
+                }
+            }
+            else response = null;
+            
+            if (response!= null) {
+                result = Integer.parseInt(response);
+            }
         }catch(MalformedURLException ex)
         {
             result = -1;
@@ -521,8 +551,16 @@ public class FighterFinderRESTClient {
             conn.setDoInput(true);
             conn.setDoOutput(true);
             
-            HashMap<String, Integer> dataParams = new HashMap();
-            dataParams.put("gameID", aGameID);
+            HashMap<String, String> dataParams = new HashMap();
+            dataParams.put("gameID", String.valueOf(aGameID));
+            OutputStream os = conn.getOutputStream();
+            
+            BufferedWriter writer = new BufferedWriter(
+                    new OutputStreamWriter(os, "UTF-8"));
+            writer.write(getQuery(dataParams));
+            writer.flush();
+            writer.close();
+            os.close();
             
             int responseCode= 0;
             String line= "";
@@ -567,6 +605,73 @@ public class FighterFinderRESTClient {
             conn.disconnect();
         }
         return aList;
+    }
+    
+    /**
+     * getOneCharacterInfo
+     * Function to all info from a character
+     * @param cID
+     * @return ACharacter
+     */
+    public ACharacter getOneCharacterInfo(int cID)
+    {
+        response = "";
+        ACharacter aChar = null;
+        try{
+            url = new URL(APIURL+"character/getOneCharacterInfo");
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(15000);
+            conn.setConnectTimeout(15000);
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded");
+            //conn
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+            
+            HashMap<String, String> dataParams = new HashMap();
+            dataParams.put("charid", String.valueOf(cID));
+            OutputStream os = conn.getOutputStream();
+            
+            BufferedWriter writer = new BufferedWriter(
+                    new OutputStreamWriter(os, "UTF-8"));
+            writer.write(getQuery(dataParams));
+            writer.flush();
+            writer.close();
+            os.close();
+            
+            int responseCode = 0;
+            String line= "";
+            responseCode = conn.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+
+                BufferedReader br= null;
+                    try {
+                        br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                        while ((line=br.readLine()) != null) {
+                            response+=line;
+                        }
+                    } catch (IOException ex) {
+                        ex.printStackTrace(System.out);
+                }
+            }
+            else response = null;
+            
+            if (response!= null) {
+                JsonObject jsonObject = new JsonParser().parse(response).getAsJsonObject();
+                aChar = new Gson().fromJson(jsonObject.get("charInfo"), ACharacter.class);
+            }
+            
+        }catch(MalformedURLException ex)
+        {
+            aChar = null;
+            ex.printStackTrace(System.out);
+        } catch (IOException ex) {
+            aChar = null;
+            ex.printStackTrace(System.out);
+        }finally{
+            conn.disconnect();
+        }
+        return aChar;
     }
     
     /**

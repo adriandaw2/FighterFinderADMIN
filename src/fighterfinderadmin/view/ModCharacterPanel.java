@@ -6,9 +6,13 @@
 package fighterfinderadmin.view;
 
 import fighterfinderadmin.controller.Controller;
+import fighterfinderadmin.entities.ACharacter;
 import fighterfinderadmin.entities.AGame;
 import fighterfinderadmin.entities.Model;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,7 +22,10 @@ public class ModCharacterPanel extends javax.swing.JPanel {
     
     private Controller myController;
     private Model myModel;
-    private int gameIDToSearch;
+    private List<AGame> aGList;
+    private int gameCharID;
+    private int charId;
+    private String charName;
     /**
      * Creates new form ModCharacterPanel
      */
@@ -28,10 +35,14 @@ public class ModCharacterPanel extends javax.swing.JPanel {
     
     public ModCharacterPanel(Controller aController, Model aModel) {
         initComponents();
-        this.gameIDToSearch = -1;
+        this.aGList = new ArrayList();
+        this.gameCharID = -1;
+        this.charId = -1;
+        this.charName = "";
         this.myController = aController;
         this.myModel = aModel;
-        fillGamesCombobox();
+        this.myModel.setMyGameList(this.myController.getAllGamesFromDatabase());
+        //fillGamesCombobox();
     }
 
     /**
@@ -43,35 +54,47 @@ public class ModCharacterPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        modCharGameListCB = new javax.swing.JComboBox();
-        characterListToModCB = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         characterNameToModTF = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
         modCharacterBtn = new javax.swing.JButton();
-
-        jLabel1.setText("Game: ");
+        charGameToMod = new javax.swing.JTextField();
+        searchCharIDTF = new javax.swing.JTextField();
+        searchCharBtn = new javax.swing.JButton();
+        gameHelpBtn = new javax.swing.JButton();
 
         jLabel2.setText("Character to mod: ");
-
-        modCharGameListCB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modCharGameListCBActionPerformed(evt);
-            }
-        });
 
         jLabel3.setText("Character name: ");
 
         characterNameToModTF.setEnabled(false);
 
-        jComboBox1.setEnabled(false);
-
-        jLabel4.setText("Character game: ");
+        jLabel4.setText("Character game ID: ");
 
         modCharacterBtn.setText("Mod character");
+        modCharacterBtn.setEnabled(false);
+        modCharacterBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                modCharacterBtnMouseClicked(evt);
+            }
+        });
+
+        charGameToMod.setEnabled(false);
+
+        searchCharBtn.setText("Search character");
+        searchCharBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchCharBtnMouseClicked(evt);
+            }
+        });
+
+        gameHelpBtn.setText("Game help");
+        gameHelpBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                gameHelpBtnMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -79,77 +102,132 @@ public class ModCharacterPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(modCharacterBtn)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel4))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(characterNameToModTF)
-                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel1))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(modCharGameListCB, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(characterListToModCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(characterNameToModTF, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(charGameToMod, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(42, 42, 42))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(36, 36, 36)
+                                .addComponent(gameHelpBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(modCharacterBtn)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchCharIDTF, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(searchCharBtn)
+                        .addGap(35, 35, 35))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(modCharGameListCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
+                .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(characterListToModCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
+                    .addComponent(searchCharIDTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchCharBtn))
+                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(characterNameToModTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(charGameToMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(modCharacterBtn)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(modCharacterBtn)
+                    .addComponent(gameHelpBtn))
                 .addContainerGap(72, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void modCharGameListCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modCharGameListCBActionPerformed
+    private void searchCharBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchCharBtnMouseClicked
         // TODO add your handling code here:
-        //fill the characters combobox with that game
-        AGame aG = (AGame)modCharGameListCB.getSelectedItem();
-        this.gameIDToSearch = aG.getId();
-        this.myModel.setMyCharList(this.myController.getAllCharactersFromGame(this.gameIDToSearch));
-        characterListToModCB.setModel(new DefaultComboBoxModel(this.myModel.getMyCharList().toArray()));
-    }//GEN-LAST:event_modCharGameListCBActionPerformed
+        try{
+            this.charId = Integer.parseInt(searchCharIDTF.getText());
+            ACharacter resChar = this.myController.getOneCharacterInfo(this.charId);
+            if(resChar != null)
+            {
+                this.charId = resChar.getId();
+                fillTextsWithData(resChar);
+            }else{
+                JOptionPane.showMessageDialog(this, "Character not found, please search again ", "Search character", JOptionPane.INFORMATION_MESSAGE);
+                disabelTextAndButton();
+            }
+        }catch(NumberFormatException ex)
+        {
+            JOptionPane.showMessageDialog(this, "Character ID to search must be a number", "Search character", JOptionPane.INFORMATION_MESSAGE);
+            disabelTextAndButton();
+        }
+        
+    }//GEN-LAST:event_searchCharBtnMouseClicked
+
+    private void modCharacterBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modCharacterBtnMouseClicked
+        // TODO add your handling code here:
+        int newGameId = -1;
+        String newCharGame = "";
+        try{
+        
+        }catch(NumberFormatException ex)
+        {
+            JOptionPane.showMessageDialog(this, "Game id must be a number", "Mod games info", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_modCharacterBtnMouseClicked
+
+    private void gameHelpBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gameHelpBtnMouseClicked
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, this.myModel.toStringAllGamesInfo(), "All games info", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_gameHelpBtnMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox characterListToModCB;
+    private javax.swing.JTextField charGameToMod;
     private javax.swing.JTextField characterNameToModTF;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton gameHelpBtn;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JComboBox modCharGameListCB;
     private javax.swing.JButton modCharacterBtn;
+    private javax.swing.JButton searchCharBtn;
+    private javax.swing.JTextField searchCharIDTF;
     // End of variables declaration//GEN-END:variables
 
     private void fillGamesCombobox() {
         this.myModel.setMyGameList(this.myController.getAllGamesFromDatabase());
         //this.currentGameID = this.myModel.getMyGameList().get(0).getId();
-        modCharGameListCB.setModel(new DefaultComboBoxModel(this.myModel.getMyGameList().toArray()));
+        //modCharGameListCB.setModel(new DefaultComboBoxModel(this.myModel.getMyGameList().toArray()));
+    }
+
+    private void fillTextsWithData(ACharacter resChar) {
+        enableTextsAndButton();
+        characterNameToModTF.setText(resChar.getName());
+        charGameToMod.setText(String.valueOf(resChar.getIdGame()));
+    }
+    
+    private void enableTextsAndButton()
+    {
+        characterNameToModTF.setEnabled(true);
+        charGameToMod.setEnabled(true);
+        modCharacterBtn.setEnabled(true);
+    }
+    
+    private void disabelTextAndButton()
+    {
+        characterNameToModTF.setEnabled(false);
+        charGameToMod.setEnabled(false);
+        modCharacterBtn.setEnabled(false);
+        characterNameToModTF.setText("");
+        charGameToMod.setText("");
     }
 }

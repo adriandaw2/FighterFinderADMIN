@@ -54,7 +54,7 @@ public class AGame{
                     if (this == obj) b = true;
                     else {
 			AGame other = (AGame) obj;
-			b = this.id != other.id;
+			b = (this.id != other.id);
                     }
 		}
 		else 

@@ -51,7 +51,9 @@ public class Model {
     
     
     /**
-     * 
+     * toStringAllGamesInfo
+     * Function to return all the games info
+     * @return String
      */
     
     public String toStringAllGamesInfo()
@@ -59,7 +61,6 @@ public class Model {
         StringBuilder sb = new StringBuilder();
         for(AGame g : this.myGameList)
         {
-            sb.append("\n");
             sb.append(g.toStringAllGameInfo());
             sb.append("\n");
         }

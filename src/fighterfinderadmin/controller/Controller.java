@@ -242,11 +242,24 @@ public class Controller {
      */
     public List<ACharacter> getAllCharactersFromGame(int gID)
     {
-        List<ACharacter> aList = null;
+        List<ACharacter> aList = myRESTClient.getAllCharactersFromGame(gID);
         System.out.println("Game selected->"+gID);
         return aList;
     }
     
+    
+    /**
+     * getOneCharacterInfo
+     * Function to get one character info
+     * @param cID
+     * @return ACharacter
+     */
+    public ACharacter getOneCharacterInfo(int cID)
+    {
+        ACharacter aChar = this.myRESTClient.getOneCharacterInfo(cID);
+        
+        return aChar;
+    }
     
     
     
