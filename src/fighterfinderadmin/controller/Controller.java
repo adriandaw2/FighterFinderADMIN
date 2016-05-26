@@ -167,7 +167,15 @@ public class Controller {
      */
     public void modifyGame(String gNameToMod, int gID)
     {
-        throw new UnsupportedOperationException("Not supported yet");
+        int result = myRESTClient.modGame(gNameToMod,gID);
+        if(result != 1)
+        {
+            JOptionPane.showMessageDialog(this.myView, "Game not modified", "Mod game info", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this.myView, "Game modified", "Mod game info", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
     
     /**
@@ -175,10 +183,19 @@ public class Controller {
      * Method to modify a character
      * @param cNameToMod
      * @param gID
+     * @param cID
      */
-    public void modifyCharacter(String cNameToMod, int gID)
+    public void modifyCharacter(String cNameToMod, int gID, int cID)
     {
-        throw new UnsupportedOperationException("Not supported yet");
+        int result = myRESTClient.modCharacter(cNameToMod, gID, cID);
+        if(result != 1)
+        {
+            JOptionPane.showMessageDialog(this.myView, "Character not modified", "Mod character info", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this.myView, "Character modified", "Mod character info", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
     
     /**
@@ -195,7 +212,7 @@ public class Controller {
         }
         else
         {
-            JOptionPane.showMessageDialog(this.myLog, "objective added to the database: "+objMesg, "Add new objective message", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this.myView, "objective added to the database: "+objMesg, "Add new objective message", JOptionPane.INFORMATION_MESSAGE);
         }
     }
     
@@ -207,7 +224,15 @@ public class Controller {
      */
     public void modifyObjective(String objMsgToMod, int oID)
     {
-        throw new UnsupportedOperationException("Not supported yet");
+        int result = myRESTClient.modObjective(objMsgToMod,oID);
+        if(result != 1)
+        {
+            JOptionPane.showMessageDialog(this.myView, "Objective not modified", "Mod objective info", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this.myView, "Objective modified", "Mod objective info", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
     
     
@@ -261,7 +286,31 @@ public class Controller {
         return aChar;
     }
     
+    /**
+     * getOneGameInfo
+     * Function to get one game info
+     * @param gID
+     * @return AGame
+     */
+    public AGame getOneGameInfo(int gID)
+    {
+        AGame aG = this.myRESTClient.getOneGameInfo(gID);
+        
+        return aG;
+    }
     
+    /**
+     * getOneObjectiveInfo
+     * Function to get all the info from a objective
+     * @param oID
+     * @return AObjective
+     */
+    public AObjective getOneObjectiveInfo(int oID)
+    {
+        AObjective aO = this.myRESTClient.getOneObjInfo(oID);
+        
+        return aO;
+    }
     
     private String getMD5(String sToMD5)
     {

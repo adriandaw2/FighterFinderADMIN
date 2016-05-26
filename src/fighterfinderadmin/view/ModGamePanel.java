@@ -6,7 +6,10 @@
 package fighterfinderadmin.view;
 
 import fighterfinderadmin.controller.Controller;
+import fighterfinderadmin.entities.AGame;
 import fighterfinderadmin.entities.Model;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,6 +20,7 @@ public class ModGamePanel extends javax.swing.JPanel {
     
     private Controller myController;
     private Model myModel;
+    private int currentGameID;
     /**
      * Creates new form ModGamePanel
      */
@@ -26,8 +30,10 @@ public class ModGamePanel extends javax.swing.JPanel {
     
     public ModGamePanel(Controller aController, Model aModel) {
         initComponents();
+        this.currentGameID = -1;
         this.myController = aController;
         this.myModel = aModel;
+        this.myModel.setMyGameList(this.myController.getAllGamesFromDatabase());
     }
 
     /**
@@ -40,16 +46,40 @@ public class ModGamePanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        gameListToModCB = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         nameGameToModTF = new javax.swing.JTextField();
         modifyGameBtn = new javax.swing.JButton();
+        gameIDToSearchTF = new javax.swing.JTextField();
+        searchGameToModBtn = new javax.swing.JButton();
+        gameHelpBtn = new javax.swing.JButton();
 
         jLabel1.setText("Game to mod: ");
 
         jLabel2.setText("Name: ");
 
+        nameGameToModTF.setEnabled(false);
+
         modifyGameBtn.setText("Modify");
+        modifyGameBtn.setEnabled(false);
+        modifyGameBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                modifyGameBtnMouseClicked(evt);
+            }
+        });
+
+        searchGameToModBtn.setText("Search game");
+        searchGameToModBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchGameToModBtnMouseClicked(evt);
+            }
+        });
+
+        gameHelpBtn.setText("Game help");
+        gameHelpBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                gameHelpBtnMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -57,41 +87,105 @@ public class ModGamePanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(modifyGameBtn)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(gameHelpBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(modifyGameBtn))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(gameListToModCB, 0, 191, Short.MAX_VALUE)
-                            .addComponent(nameGameToModTF))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nameGameToModTF, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(gameIDToSearchTF, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(searchGameToModBtn)))))
                 .addContainerGap(106, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(gameListToModCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                    .addComponent(gameIDToSearchTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchGameToModBtn))
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(nameGameToModTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(47, 47, 47)
-                .addComponent(modifyGameBtn)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(modifyGameBtn)
+                    .addComponent(gameHelpBtn))
                 .addContainerGap(84, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void gameHelpBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gameHelpBtnMouseClicked
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, this.myModel.toStringAllGamesInfo(), "All games info", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_gameHelpBtnMouseClicked
+
+    private void searchGameToModBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchGameToModBtnMouseClicked
+        // TODO add your handling code here:
+        try{
+            this.currentGameID = Integer.parseInt(gameIDToSearchTF.getText());
+            AGame resGame = this.myController.getOneGameInfo(this.currentGameID);
+            if(resGame != null)
+            {
+                this.currentGameID = resGame.getId();
+                fillTextsWithData(resGame);
+            }else{
+                JOptionPane.showMessageDialog(this, "Game not found, please search again ", "Search game", JOptionPane.INFORMATION_MESSAGE);
+                disabelTextAndButton();
+            }
+        }catch(NumberFormatException ex)
+        {
+            JOptionPane.showMessageDialog(this, "Game ID to search must be a number", "Search game", JOptionPane.INFORMATION_MESSAGE);
+            disabelTextAndButton();
+        }
+    }//GEN-LAST:event_searchGameToModBtnMouseClicked
+
+    private void modifyGameBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modifyGameBtnMouseClicked
+        // TODO add your handling code here:
+        
+        if(nameGameToModTF.getText().length() > 1)
+        {
+            this.myController.modifyGame(nameGameToModTF.getText(), this.currentGameID);
+        }
+    }//GEN-LAST:event_modifyGameBtnMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox gameListToModCB;
+    private javax.swing.JButton gameHelpBtn;
+    private javax.swing.JTextField gameIDToSearchTF;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton modifyGameBtn;
     private javax.swing.JTextField nameGameToModTF;
+    private javax.swing.JButton searchGameToModBtn;
     // End of variables declaration//GEN-END:variables
+    
+    private void enableTextsAndButton()
+    {
+        nameGameToModTF.setEnabled(true);
+        modifyGameBtn.setEnabled(true);
+    }
+    
+    private void disabelTextAndButton()
+    {
+        nameGameToModTF.setEnabled(false);
+        modifyGameBtn.setEnabled(false);
+        nameGameToModTF.setText("");
+    }
+    
+    private void fillTextsWithData(AGame resGame) {
+        enableTextsAndButton();
+        nameGameToModTF.setText(resGame.getName());
+    }
+    
 }

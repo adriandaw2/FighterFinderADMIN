@@ -27,8 +27,12 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="objectiveMsgListCB" pref="187" max="32767" attributes="0"/>
-                          <Component id="newobjectiveMessageTF" max="32767" attributes="0"/>
+                          <Component id="newobjectiveMessageTF" min="-2" pref="187" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="searchObjIDTF" min="-2" pref="26" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="searchObjBtn" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
@@ -39,12 +43,13 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="objectiveMsgListCB" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="searchObjIDTF" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="searchObjBtn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="newobjectiveMessageTF" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -62,24 +67,34 @@
         <Property name="text" type="java.lang.String" value="Select objective to modify: "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="objectiveMsgListCB">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
-        </Property>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="text" type="java.lang.String" value="Objective message: "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="newobjectiveMessageTF">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="modifyObjectiveBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Modify objective"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="modifyObjectiveBtnMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="searchObjIDTF">
+    </Component>
+    <Component class="javax.swing.JButton" name="searchObjBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Search objective"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="searchObjBtnMouseClicked"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

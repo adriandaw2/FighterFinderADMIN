@@ -6,6 +6,8 @@
 package fighterfinderadmin.view;
 
 import fighterfinderadmin.controller.Controller;
+import fighterfinderadmin.entities.AObjective;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,6 +17,7 @@ public class ModObjectivePanel extends javax.swing.JPanel {
     
     
     private Controller myController;
+    private int currentObjID;
     /**
      * Creates new form ModObjectivePanel
      */
@@ -25,6 +28,7 @@ public class ModObjectivePanel extends javax.swing.JPanel {
     public ModObjectivePanel(Controller aController) {
         initComponents();
         this.myController = aController;
+        this.currentObjID = -1;
     }
 
     /**
@@ -37,16 +41,32 @@ public class ModObjectivePanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        objectiveMsgListCB = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         newobjectiveMessageTF = new javax.swing.JTextField();
         modifyObjectiveBtn = new javax.swing.JButton();
+        searchObjIDTF = new javax.swing.JTextField();
+        searchObjBtn = new javax.swing.JButton();
 
         jLabel1.setText("Select objective to modify: ");
 
         jLabel2.setText("Objective message: ");
 
+        newobjectiveMessageTF.setEnabled(false);
+
         modifyObjectiveBtn.setText("Modify objective");
+        modifyObjectiveBtn.setEnabled(false);
+        modifyObjectiveBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                modifyObjectiveBtnMouseClicked(evt);
+            }
+        });
+
+        searchObjBtn.setText("Search objective");
+        searchObjBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchObjBtnMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -62,18 +82,22 @@ public class ModObjectivePanel extends javax.swing.JPanel {
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(objectiveMsgListCB, 0, 187, Short.MAX_VALUE)
-                            .addComponent(newobjectiveMessageTF))))
+                            .addComponent(newobjectiveMessageTF, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(searchObjIDTF, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(searchObjBtn)))))
                 .addContainerGap(60, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(objectiveMsgListCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                    .addComponent(searchObjIDTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchObjBtn))
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(newobjectiveMessageTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -83,12 +107,60 @@ public class ModObjectivePanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void modifyObjectiveBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modifyObjectiveBtnMouseClicked
+        // TODO add your handling code here:
+        if(newobjectiveMessageTF.getText().length() > 1)
+        {
+            this.myController.modifyGame(newobjectiveMessageTF.getText(), this.currentObjID);
+        }
+    }//GEN-LAST:event_modifyObjectiveBtnMouseClicked
+
+    private void searchObjBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchObjBtnMouseClicked
+        // TODO add your handling code here:
+        try{
+            this.currentObjID = Integer.parseInt(searchObjIDTF.getText());
+            AObjective resObj = this.myController.getOneObjectiveInfo(this.currentObjID);
+            if(resObj != null)
+            {
+                this.currentObjID = resObj.getId();
+                fillTextsWithData(resObj);
+            }else{
+                JOptionPane.showMessageDialog(this, "Objective not found, please search again ", "Search objective", JOptionPane.INFORMATION_MESSAGE);
+                disabelTextAndButton();
+            }
+        }catch(NumberFormatException ex)
+        {
+            JOptionPane.showMessageDialog(this, "Objective ID to search must be a number", "Search objective", JOptionPane.INFORMATION_MESSAGE);
+            disabelTextAndButton();
+        }
+    }//GEN-LAST:event_searchObjBtnMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton modifyObjectiveBtn;
     private javax.swing.JTextField newobjectiveMessageTF;
-    private javax.swing.JComboBox objectiveMsgListCB;
+    private javax.swing.JButton searchObjBtn;
+    private javax.swing.JTextField searchObjIDTF;
     // End of variables declaration//GEN-END:variables
+    
+    private void enableTextsAndButton()
+    {
+        modifyObjectiveBtn.setEnabled(true);
+        newobjectiveMessageTF.setEnabled(true);
+    }
+    
+    private void disabelTextAndButton()
+    {
+        modifyObjectiveBtn.setEnabled(false);
+        newobjectiveMessageTF.setEnabled(false);
+        newobjectiveMessageTF.setText("");
+    }
+    
+    private void fillTextsWithData(AObjective resObj) {
+        enableTextsAndButton();
+        newobjectiveMessageTF.setText(resObj.getMessage());
+    }
+    
 }

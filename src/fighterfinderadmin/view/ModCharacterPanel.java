@@ -176,12 +176,21 @@ public class ModCharacterPanel extends javax.swing.JPanel {
     private void modCharacterBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modCharacterBtnMouseClicked
         // TODO add your handling code here:
         int newGameId = -1;
-        String newCharGame = "";
+        String newCharName = "";
         try{
-        
+            newGameId = Integer.parseInt(charGameToMod.getText());
+            newCharName = characterNameToModTF.getText();
+            if(newCharName.length() < 1 || newGameId < 1)
+            {
+                JOptionPane.showMessageDialog(this, "Data is not correct", "Mod character info", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else
+            {
+                this.myController.modifyCharacter(newCharName, newGameId, this.charId);
+            }
         }catch(NumberFormatException ex)
         {
-            JOptionPane.showMessageDialog(this, "Game id must be a number", "Mod games info", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Game id must be a number", "Mod character info", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_modCharacterBtnMouseClicked
 
