@@ -56,9 +56,6 @@ public class MainView extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuBar1 = new javax.swing.JMenuBar();
-        userMenu = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
         gameMenu = new javax.swing.JMenu();
         addGameItMenu = new javax.swing.JMenuItem();
         modGameItMenu = new javax.swing.JMenuItem();
@@ -76,21 +73,6 @@ public class MainView extends javax.swing.JFrame {
                 closeApp(evt);
             }
         });
-
-        userMenu.setText("Users");
-
-        jMenuItem1.setText("jMenuItem1");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                showUserPanel(evt);
-            }
-        });
-        userMenu.add(jMenuItem1);
-
-        jMenuItem2.setText("jMenuItem2");
-        userMenu.add(jMenuItem2);
-
-        jMenuBar1.add(userMenu);
 
         gameMenu.setText("Games");
 
@@ -241,12 +223,6 @@ public class MainView extends javax.swing.JFrame {
         setVisible(true);
     }//GEN-LAST:event_showModGamePanel
 
-    private void showUserPanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showUserPanel
-        // TODO add your handling code here:
-        /*hideAll();
-        userPanel.setVisible(true);*/
-    }//GEN-LAST:event_showUserPanel
-
     private void showAddNewObjectivePanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showAddNewObjectivePanel
         // TODO add your handling code here:
         pane.removeAll();
@@ -328,12 +304,9 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JMenu charMenu;
     private javax.swing.JMenu gameMenu;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem modCharacterItMenu;
     private javax.swing.JMenuItem modGameItMenu;
     private javax.swing.JMenuItem modifyObjectiveMenuItem;
     private javax.swing.JMenu objectiveMenu;
-    private javax.swing.JMenu userMenu;
     // End of variables declaration//GEN-END:variables
 }
